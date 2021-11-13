@@ -24,7 +24,7 @@ from app import views
 from django.urls import register_converter
 
 
-class MobileConverter(object):  # 路由转发
+class MobileConverter(object):  # 路由转发器MobileConverter这个名称随便定义，但是regex不能错
     regex = "1[3-9]\d{9}"
 
     def to_python(self, value):
@@ -35,7 +35,7 @@ class MobileConverter(object):  # 路由转发
         return value
 
 
-register_converter(MobileConverter, "mobile")
+register_converter(MobileConverter, "mobile")  # 注册一个路由转发器
 
 
 urlpatterns = [
@@ -46,7 +46,9 @@ urlpatterns = [
     # re_path("article/(\d{4})/(\d{1,2})", views.article),
     # re_path("article/(\d{4})/(^([1-9]|1[012])$)", views.article)
     # 路由分发
-    path('home/', include('app.urls')),
-    path('article/', include('app2.urls')), 
-    path("index/<mobile:mobile>", views.show)
+    # path('home/', include('app.urls')),
+    # path('article/', include('app2.urls')),
+    # path("index/<mobile:mobile>", views.show)
+    path("user/", include("app3.urls")),
+    # path("login/", include("app3.urls")),
 ]
